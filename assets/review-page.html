@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>{{PAGE_TITLE}}</title>
+<style>/*__DSH_TOKENS__*/</style>
+<style>/*__PAGE_CSS__*/</style>
+</head>
+<body>
+<!-- 宿主在这里注入桥：标记必须裸着独占一行。直接双击打开时，这一行不生效，页面退回复制结果。 -->
+<div id="bridge-slot" aria-hidden="true" style="display:none">
+{{REVIEW_BRIDGE}}
+</div>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">{{LOGO_SVG}}</span>
+      <div class="brand-text"><b>校对工作台</b><small>全文修订</small></div>
+    </div>
+    <span class="doc-chip" id="docChip" title=""></span>
+    <span class="top-spacer"></span>
+    <span class="watermark">阿祖不看 TVC · demyth.info</span>
+    <div class="save-state" id="saveStateBox"><i class="save-dot" id="saveDot"></i><span id="saveState">未连接宿主</span></div>
+    <button class="icon-btn" id="undoBtn" title="撤销上一步修订" aria-label="撤销上一步修订" disabled>↶</button>
+    <button class="icon-btn" id="listBtn" title="改动清单" aria-label="改动清单">☰</button>
+    <button class="icon-btn" id="reloadBtn" title="重新加载（改完重出一版后用它拿新页面）" aria-label="重新加载">⟳</button>
+  </header>
+
+  <div class="layout">
+    <aside class="rail" id="rail" aria-label="改动清单">
+      <div class="rail-head">
+        <span class="rail-kicker">改动清单</span>
+        <span class="rail-count" id="railCount"></span>
+      </div>
+      <div class="rail-filters" id="railFilters">
+        <button data-filter="all" class="active">全部</button>
+        <button data-filter="l1">L1 机械</button>
+        <button data-filter="l2">L2 表达</button>
+        <button data-filter="l3">L3 存疑</button>
+      </div>
+      <div id="railList"></div>
+    </aside>
+
+    <main class="workspace" id="workspace">
+      <div class="workspace-inner">
+        <div class="notice" id="notice" hidden></div>
+        <header class="doc-head">
+          <div class="eyebrow">全文校对 · 可编辑修订</div>
+          <h1 id="docTitle"></h1>
+          <div class="doc-meta" id="docMeta"></div>
+          <div class="legend" aria-label="标记说明">
+            <span><i class="swatch del"></i>修改前 · 点红＝不改</span>
+            <span><i class="swatch ins"></i>修改后 · 点绿＝同意</span>
+            <span><i class="swatch ctx"></i>事实存疑</span>
+          </div>
+          <p class="head-hint">
+            点绿＝同意修改，点红＝不改；<b>没点的默认接受</b>，提交时全部按修改后合并。点完这一处就落成正文，可以直接继续改。
+          </p>
+        </header>
+        <article class="doc" id="doc" contenteditable="true" spellcheck="false" aria-label="文章正文"></article>
+        <p class="doc-foot-hint">
+          正文其余地方随时可改；AI 建议是内联的原子片段，点一下才会变成普通正文。
+          没点的建议默认接受；要保留原文就点红。⌥ 点可反向选择。撤销用顶栏 <kbd>↶</kbd> 或 <kbd>⌘Z</kbd>。
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="foot-stats" id="footStats"></div>
+    <span class="foot-spacer"></span>
+    <button class="btn" id="copyBtn" title="没有宿主时，用这份 JSON 粘回对话">复制结果</button>
+    <button class="btn primary" id="submitBtn">提交给模型</button>
+  </footer>
+</div>
+
+<div class="rail-scrim" id="railScrim" hidden></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+  var DATA = {{REVIEW_DATA}};
+</script>
+<script>
+/*__APP_JS__*/
+</script>
+</body>
+</html>

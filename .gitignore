@@ -1,0 +1,30 @@
+# Secrets and local configuration
+.env
+.env.*
+*.pem
+*.key
+*.token
+
+# Project artifacts and generated review outputs
+*-校对确认/
+*-校对版.*
+review-feedback*.json
+review-draft*.json
+wake-log.jsonl
+output/
+outputs/
+dist/
+build/
+coverage/
+test-log/
+
+# Runtime and caches
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+*.log
+*.tmp
+.DS_Store
